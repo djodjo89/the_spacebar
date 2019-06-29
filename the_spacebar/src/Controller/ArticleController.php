@@ -2,9 +2,10 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class ArticleController
+class ArticleController extends AbstractController
 {
     /**
      * @Route("/")
@@ -14,11 +15,19 @@ class ArticleController
          return new Response ('Tro bien ma premiere page !');
     }
     /**
-     * @Route("/news/pktufaiscavadormir")
+     * @Route("/news/{titre}")
      */
-    public function show()
+    public function show($titre)
     {
-        return new Response("coucou");
+        $comments = [
+            "commentaire commentaire commentaire",
+            "eriatnemmoc eriatnemmoc eriatnemmoc",
+            "moc moc moc",
+        ];
+        return $this->render("article/show.html.twig", [
+            "titre" => ucwords(str_replace('-', '', $titre)),
+            "comments" => $comments,
+        ]);
     }
     /**
      * @Route("cool/{leparametrequejeveux}")
