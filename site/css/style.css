@@ -1,0 +1,159 @@
+
+body{
+	margin: 0 auto;
+	display: block;
+	width: 100%;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+}
+
+header{
+	width: 100%;
+	display: inline-block;
+	
+}
+
+
+nav {
+	background : url("../img/background-image.jpg");
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+	padding:15px 0;
+}
+
+nav a {
+	text-align: center;
+	text-transform: uppercase;
+	color: white;
+	padding-right: 20px;
+	letter-spacing: 2px;
+	font-size: 12px;
+	margin-right: 20px;
+	border-right: 1px solid white;
+	text-decoration: none;
+}
+
+section {
+	width: 90%;
+	display: block;
+	margin: 0 auto;
+	background-color: #f6f6f6;
+	padding: 20px;
+}
+
+
+ 
+#table {
+
+	width : 200%;
+}
+
+#premiereColonne{
+	width: 30%;
+	
+}
+
+table,td {
+    border: 1px solid #333;
+}
+
+
+#troisiemeColonne{
+	width : 30%;
+}
+
+#pays{
+	width: 30%;
+}
+
+
+
+th {
+
+    background-color: #333;
+    color: #fff;
+}
+
+
+img {
+	max-width: 100%;
+	min-width: 100%;
+}
+
+h1{
+	text-transform: capitalize;
+	letter-spacing: 1px;
+	font-weight: 300;
+	text-align: center;
+	font-size: 25px;
+	width: 85%;
+	margin: 0 auto;
+	padding: 30px 0;
+
+}
+
+
+footer {
+	display: inline-block;
+	width: 100%;
+	background : url("../img/background-image.jpg");
+	color: white;
+	text-align: center;
+	padding: 20px 0;
+	text-transform: uppercase;
+	letter-spacing: 1.5px;
+}
+
+
+
+.img1{
+	width : 180px;
+	height: 90px;
+}
+
+
+#graphiqueDroit{
+	width: 30%;
+	height : 30%;
+	display : inline-block;
+	
+}
+
+#arabica{	
+	width : 115px;
+	height : 140px;
+	background-color : red;
+
+
+}
+
+#txtConnexion {
+
+	margin-left : 1em ;
+
+}
+
+
+#robusta {
+	display : inline-block;
+
+	width : 115px;
+	height : 190px;
+
+	background-color: blue;
+	
+}
+
+
+#textArabica{
+	width: 5%;
+
+	
+
+}
+#textRobusta {
+	width: 5%;
+	
+
+}
