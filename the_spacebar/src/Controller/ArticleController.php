@@ -69,8 +69,6 @@ class ArticleController extends AbstractController
             "comments" => $comments,
         ]);
 
-        dump($html);die;
-
         return new Response ($html);
     }
 
