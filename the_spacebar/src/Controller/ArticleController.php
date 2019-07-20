@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Repository\ArticleRepository;
 use App\Service\MarkdownHelper;
 use App\Service\SlackClient;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,9 +28,12 @@ class ArticleController extends AbstractController
     /**
      * @Route("/", name="app_homepage")
      */
-    public function homepage()
+    public function homepage(ArticleRepository $repository, EntityManagerInterface $em, LoggerInterface $logger)
     {
-        return $this->render('article/homepage.html.twig');
+        $articles = $repository->findAllPublishedOrderedByNewest();
+        return $this->render('article/homepage.html.twig', [
+            'articles' => $articles,
+        ]);
     }
 
     /**
@@ -45,17 +49,10 @@ class ArticleController extends AbstractController
     /**
      * @Route("/news/{titre}", name="article_show")
      */
-    public function show($titre, Environment $twigEnvironment, SlackClient $slack, EntityManagerInterface $em)
+    public function show(Article $article, Environment $twigEnvironment, SlackClient $slack, EntityManagerInterface $em)
     {
-        if ($titre === "khaaaaaan") {
+        if ($article->getSlug() === "khaaaaaan") {
             $slack->sendMessage('Kahn', 'Ah, Kirk, my old friend...');
-        }
-
-        $repository = $em->getRepository(Article::class);
-        /** @var Article $article */
-        $article = $repository->findOneBy(["slug" => $titre]);
-        if (!$article) {
-            throw $this->createNotFoundException(sprintf('Pas d\'article pour le titre "%s"', $titre));
         }
 
         $comments = [
