@@ -28,7 +28,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/", name="app_homepage")
      */
-    public function homepage(ArticleRepository $repository, EntityManagerInterface $em, LoggerInterface $logger)
+    public function homepage(ArticleRepository $repository)
     {
         $articles = $repository->findAllPublishedOrderedByNewest();
         return $this->render('article/homepage.html.twig', [
@@ -49,11 +49,16 @@ class ArticleController extends AbstractController
     /**
      * @Route("/news/{titre}", name="article_show")
      */
-    public function show(Article $article, Environment $twigEnvironment, SlackClient $slack, EntityManagerInterface $em)
+    public function show($titre, SlackClient $slack, EntityManagerInterface $em)
     {
-        if ($article->getSlug() === "khaaaaaan") {
+        if ($titre === "khaaaaaan") {
             $slack->sendMessage('Kahn', 'Ah, Kirk, my old friend...');
         }
+        
+        $repository = $em->getRepository(Article::class);
+        
+        /** @var Article $article */
+        $article = $repository->findOneBy(['title' => $titre]);
 
         $comments = [
             "commentaire commentaire commentaire",
@@ -61,12 +66,10 @@ class ArticleController extends AbstractController
             "moc moc moc",
         ];
 
-        $html = $twigEnvironment->render("article/show.html.twig", [
+        return $this->render("article/show.html.twig", [
             "article" => $article,
             "comments" => $comments,
         ]);
-
-        return new Response ($html);
     }
 
     /**
