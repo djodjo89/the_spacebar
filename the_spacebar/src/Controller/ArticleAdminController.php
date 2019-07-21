@@ -18,7 +18,7 @@ class ArticleAdminController extends AbstractController
     public function new(EntityManagerInterface $em)
     {
         $article = new Article();
-        $article->setTitle("Khaaaaaan ")
+        $article->setTitle("Khaaaaaan")
             ->setSlug("pk".rand(100, 999))
             ->setContent(<<<EOF
 Spicy **jalapeno bacon** ipsum dolor amet veniam shank in dolore. Ham hock nisi landjaeger cow,
@@ -41,6 +41,10 @@ EOF
         if (rand(1, 10) > 2) {
             $article->setPublishedAt(new \DateTime(sprintf("-%d days", rand(1, 100))));
         }
+        
+        $article->setAuthor('Mike Ferengi')
+            ->setHeartCount(rand(5, 100))
+            ->setImageFilename('asteroids.jpg');
 
         $em->persist($article);
         $em->flush();
