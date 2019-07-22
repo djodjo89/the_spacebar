@@ -89,13 +89,18 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/news/{$titre}/heart", name="article_toggle_heart", methods={"POST"})
+     * @Route("/news/{titre}/heart", name="article_toggle_heart", methods={"POST"})
      */
-    public function toggleArticleHeart($titre, LoggerInterface $logger)
+    public function toggleArticleHeart($titre, LoggerInterface $logger, EntityManagerInterface $em)
     {
-        // TODO - aimer l'article
-
-        return new JsonResponse(["hearts" => rand (5, 100)]);
+        $repository = $em->getRepository(Article::class);
+        $article = $repository->findOneBy(['title' => $titre]);
+        $article->incrementHeartCount();
+        $em->flush();
+        
+        $logger->info('Article is being hearted!');
+        
+        return new JsonResponse(['hearts' => $article->getHeartCount()]);
     }
 }
 
