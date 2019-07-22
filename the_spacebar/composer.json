@@ -69,7 +69,7 @@
 	},
 	"minimum-stability" : "RC",
 	"require-dev": {
-		"doctrine/doctrine-fixtures-bundle": "^3.2",
+		"doctrine/doctrine-fixtures-bundle": "3.0.2",
 		"easycorp/easy-log-handler": "^1.0.7",
 		"fzaninotto/faker": "^1.8",
 		"symfony/debug-bundle": "*",
